@@ -1,0 +1,79 @@
+from task.models import Todos
+
+ModelName.objects.create(field_name=value)
+
+Todos.objects.create(title="water bill",user="hari")
+
+========fetch all records=============> 
+
+select * from Todos
+
+queryset
+qs=MOdelName.objects.all()
+qs=Todos.objects.all()
+
+===========================================
+3)orm query for filter records
+
+fetch all todos inserted by hari
+
+qs=Todos.objects.filter(user="hari")
+
+
+fetch all pending todos inserted by user vijay
+qs=Todos.objects.filter(user="vijay",status=False)
+
+
+fetch todo with id=1
+qs=Todos.objects.get(id=100)
+
+
+orm query for updateing a record
+MOdelname.objects.filter(id=1).update(status=Trure)
+
+
+field look up
+
+gt=> greater than
+lt=> lessthan
+gte=> >=
+lte=> <=
+in
+
+fetch all records whose id in range of (2,6)
+qs=Todos.objects.filter(id__gte=2,id__lte=6) 
+
+
+qs=Todos.objects.filter(id__in=[1,3,6]).update(status=True)
+
+qs=Todos.objects.filter(user__in=["hari","vijay"])
+
+qs=Todos.objects.filter(title__in=["medicine","emi"])
+
+
+
+Modelname.objects.create(field_name=value)
+qs=Modelname.objects.all()
+
+qs=Modelanme.objects.get(id=1)
+Modelanme.objects.filter(condition)
+
+book price > 500
+Books.objects.filter(price__gte=500)
+
+Books.objects.filter(price__gte=500,price__lte=1000)
+
+Books.objects.filter(category__in=["novel","fiction"])
+
+Modelanme.objects.filter(id=1).delete()
+
+orm qury for listing a specific column
+qs=Modelanme.objects.all().values("id")
+
+qs=Books.objects.all().values("name")
+
+
+
+qs=Todos.objects.all().exclude(user="hari")
+
+qs=Books.objects.all().exclude(category="novel")
