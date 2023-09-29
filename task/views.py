@@ -59,3 +59,15 @@ class TodoUpdateView(View):
         form=TodoChangeForm(instance=obj)
         return render(request,"todo_edit.html",{"form":form})
     
+    def post(self,request,*args,**kwargs):
+        id=kwargs.get("pk")
+        obj=Todos.objects.get(id=id)
+        form=TodoChangeForm(request.POST,instance=obj)
+        if form.is_valid():
+            form.save()
+            return redirect("todo-list")
+        else:
+            return render(request,"todo_edit.html",{"form":form})
+
+
+
