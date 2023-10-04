@@ -1,7 +1,10 @@
 from django.shortcuts import render,redirect
-from remainder.forms import RegistrationForm
+from remainder.forms import RegistrationForm,LoginForm
 from django.views.generic import View
 from django.contrib import messages
+# model relation ship
+# 1:1 1:M M:M
+
 
 
 class SignUpView(View):
@@ -19,6 +22,16 @@ class SignUpView(View):
             messages.error(request,"faild to create account")
             return render(request,"signup.html",{"form":form})
         
-            # User.objects.create_user(**form.cleaned_data)
+
+
+class SignInView(View):
+
+    def get(self,request,*args,**kwargs):
+        form=LoginForm()
+        return render(request,"login.html",{"form":form})
+    
+
+
+
 
 
