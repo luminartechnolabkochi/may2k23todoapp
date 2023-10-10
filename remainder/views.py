@@ -1,4 +1,6 @@
 from django.db.models.query import QuerySet
+from django.forms.models import BaseModelForm
+from django.http import HttpResponse
 from django.shortcuts import render,redirect
 from django.urls import reverse_lazy
 from remainder.forms import RegistrationForm,LoginForm,TodoCreateForm,TodoChangeForm
@@ -65,6 +67,11 @@ class IndexView(CreateView,ListView):
     context_object_name="todos"
     success_url=reverse_lazy("index")
     model=Todos
+
+    def form_valid(self, form: BaseModelForm):
+        # form=super().form_valid()
+        form.instance.user=self.request.user
+        return super().form_valid(form)
 
    
 
