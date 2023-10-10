@@ -21,22 +21,18 @@
                         <td>title</td>
                         <td>user</td>
                         <td>status</td>
-                        <td>due_date</td>
+                        <td>created_date</td>
                         <td class="text-center">Action</td>
                     </tr>
-                    {{todos}}
 
                     {%for todo in todos%}
                         <tr>
                                 <td>{{todo.title}}</td>
                                 <td>{{todo.user}}</td>
                                 <td>{{todo.status}}</td>
-                                <td>{{todo.due_date}}</td>
+                                <td>{{todo.created_date}}</td>
                                <td class="px-2">
-                                <a href="{%url 'todo-detail' todo.id %}" class="ms-1"><i class="fa-regular fa-eye fa-shake text-info"></i></a>
-                                <a href="{%url 'todo-remove' todo.id %}" class="ms-1"><i class="fa-solid fa-trash text-danger"></i></a>
-                                <a href="{%url 'todo-change' todo.id %}" class="ms-1"><i class="fa-solid fa-pen-to-square text-warning"></i></a>
-
+                              
                             </td>
                         </tr>
                     {%endfor%}
@@ -48,8 +44,6 @@
             <div class="col-2"></div>
         </div>
     </div>
-
-
 
 </body>
 </html>
