@@ -1,3 +1,5 @@
+from typing import Any
+from django.db import models
 from django.db.models.query import QuerySet
 from django.forms.models import BaseModelForm
 from django.http import HttpResponse
@@ -67,12 +69,32 @@ class IndexView(CreateView,ListView):
     context_object_name="todos"
     success_url=reverse_lazy("index")
     model=Todos
+  
 
-    def form_valid(self, form: BaseModelForm):
-        # form=super().form_valid()
+
+    def form_valid(self,form):
         form.instance.user=self.request.user
         return super().form_valid(form)
+    
+    def get_queryset(self):
+        qs=Todos.objects.filter(user=self.request.user)
+        return qs
+    
 
+   
+
+    # def post(self,request,*args,**kwargs):
+    #     form=TodoCreateForm(request.POST)
+    #     if form.is_valid():
+    #         form.instance.user=request.user
+    #         form.save()
+    #         return redirect("index")
+    #     else:
+    #          return redirect("index")
+
+
+   
+# 
    
 
 @method_decorator(signin_required,name="dispatch")
